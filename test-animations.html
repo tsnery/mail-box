@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teste de Animações</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #ffe6e6;
+      }
+      .animation-container {
+        width: 300px;
+        height: 300px;
+        margin: 20px;
+        border: 1px solid #ccc;
+        background-color: white;
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        background-color: #ff6b6b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .controls {
+        display: flex;
+        margin-bottom: 20px;
+      }
+      h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Teste de Animações Lottie</h1>
+
+    <div class="controls">
+      <button id="play-mailbox">Reproduzir Caixa de Correio</button>
+      <button id="play-letter">Reproduzir Carta</button>
+    </div>
+
+    <h2>test-mailbox.json</h2>
+    <div class="animation-container" id="mailbox-animation"></div>
+
+    <h2>test-letter.json</h2>
+    <div class="animation-container" id="letter-animation"></div>
+
+    <div id="status"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const statusElement = document.getElementById("status");
+
+        // Tentar carregar a animação da caixa de correio
+        let mailboxAnimation;
+        try {
+          mailboxAnimation = lottie.loadAnimation({
+            container: document.getElementById("mailbox-animation"),
+            renderer: "svg",
+            loop: false,
+            autoplay: false,
+            path: "test-mailbox.json",
+          });
+
+          mailboxAnimation.addEventListener("data_ready", () => {
+            statusElement.innerHTML +=
+              '<p style="color: green;">✓ test-mailbox.json carregado com sucesso</p>';
+          });
+
+          mailboxAnimation.addEventListener("data_failed", () => {
+            statusElement.innerHTML +=
+              '<p style="color: red;">✗ Falha ao carregar test-mailbox.json</p>';
+          });
+        } catch (error) {
+          statusElement.innerHTML += `<p style="color: red;">✗ Erro ao inicializar test-mailbox.json: ${error.message}</p>`;
+        }
+
+        // Tentar carregar a animação da carta
+        let letterAnimation;
+        try {
+          letterAnimation = lottie.loadAnimation({
+            container: document.getElementById("letter-animation"),
+            renderer: "svg",
+            loop: false,
+            autoplay: false,
+            path: "test-letter.json",
+          });
+
+          letterAnimation.addEventListener("data_ready", () => {
+            statusElement.innerHTML +=
+              '<p style="color: green;">✓ test-letter.json carregado com sucesso</p>';
+          });
+
+          letterAnimation.addEventListener("data_failed", () => {
+            statusElement.innerHTML +=
+              '<p style="color: red;">✗ Falha ao carregar test-letter.json</p>';
+          });
+        } catch (error) {
+          statusElement.innerHTML += `<p style="color: red;">✗ Erro ao inicializar test-letter.json: ${error.message}</p>`;
+        }
+
+        // Adicionar event listeners aos botões
+        document
+          .getElementById("play-mailbox")
+          .addEventListener("click", () => {
+            if (mailboxAnimation) {
+              mailboxAnimation.goToAndPlay(0, true);
+            }
+          });
+
+        document.getElementById("play-letter").addEventListener("click", () => {
+          if (letterAnimation) {
+            letterAnimation.goToAndPlay(0, true);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

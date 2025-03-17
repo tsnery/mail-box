@@ -1,0 +1,231 @@
+/* Variáveis de cores */
+:root {
+  --rosa-suave: #ffe6e6;
+  --rosa-medio: #ffb6c1;
+  --dourado: #ffd700;
+  --vermelho-suave: #ff6b6b;
+  --bege-papel: #f5e6d3;
+}
+
+/* Reset e estilos gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: var(--rosa-suave);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+/* Canvas para partículas */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Corações flutuantes */
+.hearts-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.heart {
+  position: absolute;
+  color: var(--rosa-medio);
+  opacity: 0.6;
+  font-size: 20px;
+  animation: float-heart 15s linear infinite;
+}
+
+@keyframes float-heart {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-50px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Mailbox container */
+.mailbox-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.mailbox-container:hover {
+  transform: scale(1.05);
+}
+
+#mailbox-animation {
+  width: 100%;
+  height: 100%;
+}
+
+.hint-text {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+  color: var(--vermelho-suave);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Letter container */
+.letter-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+#letter-animation {
+  width: 80%;
+  max-width: 500px;
+}
+
+/* Papel amassado */
+.crumpled-paper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  min-height: 300px;
+  background: var(--bege-papel);
+  padding: 2rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), inset 0 0 30px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  opacity: 0;
+  z-index: 3;
+}
+
+.crumpled-paper.visible {
+  animation: unfold 1.5s ease-out forwards;
+}
+
+.paper-content {
+  font-family: "Dancing Script", cursive;
+  color: #333;
+  line-height: 1.6;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+@keyframes unfold {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+  }
+}
+
+/* Efeito de escrita gradual */
+.typing-effect {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end);
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .mailbox-container {
+    width: 250px;
+    height: 250px;
+  }
+
+  .hint-text {
+    font-size: 1.2rem;
+  }
+
+  .paper-content {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mailbox-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hint-text {
+    font-size: 1rem;
+  }
+
+  .crumpled-paper {
+    padding: 1.5rem;
+  }
+
+  .paper-content {
+    font-size: 1rem;
+  }
+}
