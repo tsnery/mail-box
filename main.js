@@ -47,10 +47,6 @@ function initLottieAnimations() {
 
   // Mostrar status no elemento de status
   const statusElement = document.getElementById("status");
-  if (statusElement) {
-    statusElement.style.display = "block";
-    statusElement.innerHTML = "<p>Inicializando animações...</p>";
-  }
 
   // Função para carregar uma animação com fallback
   function loadAnimationWithFallback(options, fallbackPath, onComplete) {
@@ -70,29 +66,17 @@ function initLottieAnimations() {
       // Adicionar eventos
       animation.addEventListener("DOMLoaded", () => {
         console.log(`DOM carregado: ${path}`);
-        if (statusElement) {
-          statusElement.innerHTML += `<p style="color: green;">✓ DOM carregado: ${path}</p>`;
-        }
       });
 
       animation.addEventListener("data_ready", () => {
         console.log(`Dados carregados com sucesso: ${path}`);
-        if (statusElement) {
-          statusElement.innerHTML += `<p style="color: green;">✓ Dados carregados: ${path}</p>`;
-        }
       });
 
       animation.addEventListener("data_failed", (error) => {
         console.error(`Falha ao carregar dados: ${path}`, error);
-        if (statusElement) {
-          statusElement.innerHTML += `<p style="color: red;">✗ Falha ao carregar: ${path}</p>`;
-        }
 
         // Tentar carregar o fallback
         console.log(`Tentando carregar fallback: ${fallbackPath}`);
-        if (statusElement) {
-          statusElement.innerHTML += `<p>Tentando fallback: ${fallbackPath}</p>`;
-        }
 
         const fallbackAnimation = lottie.loadAnimation({
           container: container,
