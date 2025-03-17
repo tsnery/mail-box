@@ -1,23 +1,14 @@
-/**
- * Aplicação Romântica Interativa
- * Desenvolvido com amor ❤️
- */
-
-// Configurações
 const CONFIG = {
-  // Mensagem de amor que aparecerá no papel
   loveMessage:
-    "Meu amor, cada dia ao seu lado é uma nova aventura. Você ilumina minha vida com seu sorriso e aquece meu coração com seu amor. Você é meu presente mais precioso, meu sonho realizado, minha felicidade completa. Te amo infinitamente! ❤️",
+    "Esta carta simboliza diversos sentimentos meus e um passo a mais na busca por ser uma pessoa melhor, por isso fiz isto aqui, com todo carinho e amor que sinto por você, quero ter você na minha vida e te amar para sempre, te fazer feliz e pedir perdão por te machucar, te causar inseguranças e te fazer sentir que não é suficiente. Quero provar que você é de longe mais que suficiente.",
 
-  // Configurações de animação
   animation: {
-    heartCount: 15, // Quantidade de corações flutuantes
-    particleCount: 50, // Quantidade de partículas de brilho
-    typeSpeed: 50, // Velocidade da digitação (ms por caractere)
+    heartCount: 15,
+    particleCount: 50,
+    typeSpeed: 50,
   },
 };
 
-// Elementos DOM
 let mailboxContainer;
 let letterContainer;
 let crumpledPaper;
@@ -25,18 +16,15 @@ let loveMessageElement;
 let particlesCanvas;
 let heartsContainer;
 
-// Animações Lottie
 let mailboxAnimation;
 let letterAnimation;
 
-// Estado da aplicação
 const state = {
   animationStarted: false,
   letterShown: false,
   paperShown: false,
 };
 
-// Inicialização
 document.addEventListener("DOMContentLoaded", () => {
   initElements();
   initLottieAnimations();
@@ -45,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
   addEventListeners();
 });
 
-// Inicializar elementos DOM
 function initElements() {
   mailboxContainer = document.querySelector(".mailbox-container");
   letterContainer = document.querySelector(".letter-container");
@@ -55,7 +42,6 @@ function initElements() {
   heartsContainer = document.querySelector(".hearts-container");
 }
 
-// Inicializar animações Lottie
 function initLottieAnimations() {
   console.log("Inicializando animações Lottie...");
 
@@ -182,18 +168,15 @@ function initLottieAnimations() {
   );
 }
 
-// Criar corações flutuantes
 function createFloatingHearts() {
   for (let i = 0; i < CONFIG.animation.heartCount; i++) {
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "❤️";
 
-    // Posição e tamanho aleatórios
     heart.style.left = `${Math.random() * 100}%`;
     heart.style.fontSize = `${Math.random() * 15 + 10}px`;
 
-    // Duração e atraso aleatórios
     const duration = Math.random() * 10 + 10;
     const delay = Math.random() * 10;
 
@@ -204,12 +187,10 @@ function createFloatingHearts() {
   }
 }
 
-// Inicializar partículas de brilho
 function initParticles() {
   const canvas = particlesCanvas;
   const ctx = canvas.getContext("2d");
 
-  // Ajustar tamanho do canvas
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -218,7 +199,6 @@ function initParticles() {
   window.addEventListener("resize", resizeCanvas);
   resizeCanvas();
 
-  // Criar partículas
   const particles = [];
 
   for (let i = 0; i < CONFIG.animation.particleCount; i++) {
@@ -233,7 +213,6 @@ function initParticles() {
     });
   }
 
-  // Função para obter cor aleatória
   function getRandomColor() {
     const colors = [
       "#FFB6C1", // Rosa
@@ -255,11 +234,9 @@ function initParticles() {
       ctx.globalAlpha = particle.opacity;
       ctx.fill();
 
-      // Mover partícula
       particle.x += particle.speedX;
       particle.y += particle.speedY;
 
-      // Verificar limites
       if (particle.x < 0 || particle.x > canvas.width) {
         particle.speedX = -particle.speedX;
       }

@@ -1,6 +1,5 @@
 const http = require("http");
 
-// Função para fazer uma requisição HTTP
 function makeRequest(path) {
   return new Promise((resolve, reject) => {
     const options = {
@@ -27,7 +26,6 @@ function makeRequest(path) {
         console.log(`Primeiros 100 caracteres: ${data.substring(0, 100)}...`);
 
         try {
-          // Tentar fazer o parse do JSON
           const json = JSON.parse(data);
           console.log("✅ JSON válido");
           resolve({ status: res.statusCode, data: json });
@@ -47,7 +45,6 @@ function makeRequest(path) {
   });
 }
 
-// Verificar os arquivos
 async function checkFiles() {
   console.log("=== VERIFICANDO ARQUIVOS NO SERVIDOR ===\n");
 
@@ -86,5 +83,4 @@ async function checkFiles() {
   console.log("=== FIM DA VERIFICAÇÃO ===");
 }
 
-// Executar a verificação
 checkFiles().catch(console.error);
